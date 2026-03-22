@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Advantage of Constraints — Nahom Mekonen</title>
+  <meta name="description" content="Abundance is the enemy of clarity. What building without a safety net taught me about product decisions that actually matter.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F8F5EF; --bg-card: #FFFFFF; --bg-dark: #1C1814;
+      --text: #1C1814; --text-muted: #7A726A; --text-light: #B5ADA4;
+      --accent: #C4612A; --accent-warm: #E07A45; --accent-bg: #FDF0E6;
+      --border: #E5DDD3; --serif: 'Fraunces', Georgia, serif;
+      --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --tr: 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 32px; height: 64px; display: flex; align-items: center; justify-content: space-between; background: rgba(248,245,239,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--accent); }
+    .back-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--text-muted); transition: color var(--tr); }
+    .back-link:hover { color: var(--text); }
+
+    .post-wrap { max-width: 660px; margin: 0 auto; padding: 112px 32px 96px; }
+    .post-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 32px; flex-wrap: wrap; }
+    .post-cat { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .dot { color: var(--text-light); }
+    .post-date, .post-read { font-size: 12px; color: var(--text-light); }
+
+    h1.post-title {
+      font-family: var(--serif);
+      font-size: clamp(34px, 5.5vw, 54px);
+      font-weight: 500; line-height: 1.08; letter-spacing: -0.025em;
+      margin-bottom: 22px;
+    }
+    .post-subtitle { font-size: 18px; line-height: 1.7; color: var(--text-muted); margin-bottom: 48px; font-weight: 300; }
+    .post-divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+    .post-body h2 {
+      font-family: var(--serif); font-size: clamp(22px, 3vw, 28px);
+      font-weight: 500; line-height: 1.2; letter-spacing: -0.015em;
+      margin: 56px 0 18px;
+    }
+    .post-body p { font-size: 16.5px; line-height: 1.85; color: var(--text-muted); margin-bottom: 24px; }
+    .post-body p strong { color: var(--text); font-weight: 600; }
+    .post-body p em { font-style: italic; }
+    .post-body p:last-child { margin-bottom: 0; }
+
+    blockquote {
+      border-left: 3px solid var(--accent); padding: 4px 24px; margin: 40px 0;
+      font-family: var(--serif); font-size: 21px; line-height: 1.55;
+      font-style: italic; color: var(--text);
+    }
+
+    .aphorism {
+      background: var(--bg-dark); color: rgba(255,255,255,0.9);
+      border-radius: 14px; padding: 28px 32px; margin: 40px 0;
+      font-family: var(--serif); font-size: 19px; line-height: 1.55;
+      font-style: italic; letter-spacing: -0.01em;
+    }
+
+    .post-footer { margin-top: 64px; padding-top: 44px; border-top: 1px solid var(--border); }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; color: var(--accent); border: 1.5px solid var(--accent); border-radius: 100px; padding: 10px 22px; transition: background var(--tr), color var(--tr); }
+    .back-btn:hover { background: var(--accent); color: #fff; }
+
+    footer { border-top: 1px solid var(--border); padding: 26px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-l { font-family: var(--serif); font-size: 14.5px; color: var(--text-muted); }
+    .footer-l span { color: var(--accent); }
+    .footer-r { font-size: 12px; color: var(--text-light); }
+
+    @media (max-width: 640px) {
+      .post-wrap { padding: 100px 20px 72px; }
+      nav { padding: 0 20px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">N<span>.</span>M</a>
+  <a href="../index.html#learning" class="back-link">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
+</nav>
+
+<div class="post-wrap">
+  <div class="post-meta">
+    <span class="post-cat">Product Thinking</span>
+    <span class="dot">·</span>
+    <span class="post-date">February 2025</span>
+    <span class="dot">·</span>
+    <span class="post-read">7 min read</span>
+  </div>
+
+  <h1 class="post-title">The Advantage of Constraints</h1>
+  <p class="post-subtitle">Abundance is the enemy of clarity. What building without a safety net taught me about product decisions that actually matter — and why most teams are thinking about resources backwards.</p>
+
+  <hr class="post-divider">
+
+  <div class="post-body">
+
+    <p>Most product advice is written by people who have always had enough. Enough engineers, enough runway, enough time to A/B test their way to conviction. The implicit assumption in almost everything you read about building products is that the bottleneck is insight — that if you just talk to enough users, run enough experiments, and write good enough specs, good products will follow.</p>
+
+    <p>That assumption might be true when the infrastructure exists, the market is established, and failure costs you a quarter instead of a company. But it creates a specific kind of blindness — a tendency to substitute process for judgment, to reach for the framework when the answer should come from first principles.</p>
+
+    <p>I built Kabba Transport in Addis Ababa with none of the typical safety nets. No VC backing with 18 months of runway to figure it out. No existing playbook for mass transit technology in that market. No ability to ship fast and iterate — because in a city of five million commuters with no reliable transit, a platform that doesn't work on day one doesn't get a day two. The constraints were total. And they clarified everything.</p>
+
+    <blockquote>"Wealth is the slave of a wise man, the master of a fool." — Seneca. The same is true of resources in product development.</blockquote>
+
+    <h2>Optionality Is a Drug</h2>
+
+    <p>Nassim Taleb wrote about optionality as a virtue — the idea that preserving future choices has value. He's right, in finance, in life strategy, in career decisions. But in product development, <strong>unlimited optionality is quietly catastrophic.</strong></p>
+
+    <p>When you can always run another test, ship another iteration, add another feature to see what sticks — you never have to develop the harder skill of knowing in advance what's worth building. You outsource judgment to data. And data, collected at scale in established markets, will mostly confirm what you already suspected and rarely surface what you don't know to look for.</p>
+
+    <p>Constraints force a different question. Not "what should we test?" but "what do we need to be true for this to work?" Not "what does the data say?" but "what does the system actually require?" These are harder questions. They require understanding the problem at a level that most product teams, swimming in resources, never develop. They require skin in the game.</p>
+
+    <h2>Skin in the Game</h2>
+
+    <p>Taleb's concept of skin in the game — the idea that decision-makers should bear the consequences of their own decisions — is usually discussed in finance. But it applies directly to product work, and most product organizations are structured to avoid it.</p>
+
+    <p>A PM at a large company who ships a feature that underperforms gets a learning opportunity. A founder in a resource-constrained market who ships the wrong thing gets an ending. That difference in consequence produces a different quality of thinking. Not better raw intelligence — different <em>prior screening</em> on ideas before they become work.</p>
+
+    <p>When I was deciding whether to require upfront payment from commuters — a decision that went against every standard freemium instinct — I couldn't afford to be wrong. That consequence changed how I reasoned about it. I didn't ask "what would most users prefer?" I asked "what does this system need from users in order to function?" Those are different questions. The second one led to the right answer.</p>
+
+    <div class="aphorism">"The best product decisions I've made were the ones I couldn't afford to undo."</div>
+
+    <h2>Via Negativa</h2>
+
+    <p>There's an old philosophical principle called <em>via negativa</em> — the idea that you can better define something by what it is not than by what it is. Taleb applied it to decision-making: instead of adding things to improve a situation, remove things. Most complex problems are solved by subtraction, not addition.</p>
+
+    <p>Building in a constrained environment is via negativa applied by force. When you can't build everything, you learn with unusual clarity what actually matters. The features that survive the constraint are the ones with genuine utility. Everything else is revealed as noise that you'd been calling signal.</p>
+
+    <p>At Kabba, we couldn't build the comprehensive platform. We built the operations dashboard before the consumer app, because financial reconciliation was the single highest-friction point in the entire system — invisible from the outside, critical from within. In a well-resourced environment, that insight might have been buried under a roadmap full of consumer-facing features that were more visible and easier to justify to stakeholders. Constraints surfaced it.</p>
+
+    <h2>The Paradox of More</h2>
+
+    <p>Naval Ravikant has a useful frame for thinking about leverage: <strong>the most important returns in life come from compound interest — in relationships, knowledge, wealth, and skill.</strong> The implication is that early decisions about where to focus compound over time, which means the cost of unfocused early work isn't just the immediate waste — it's the opportunity cost of all the compounding you didn't do.</p>
+
+    <p>More resources in product development often produce less compounding because they allow — and subtly encourage — unfocused work. Teams ship more features, which creates more surface area to maintain, which consumes the bandwidth that should be going into the next meaningful improvement. The product grows in breadth faster than it grows in depth. Users get more to learn and less reason to stay.</p>
+
+    <p>Constrained teams, because they can't afford this, tend to compound better. Every decision to build something is also a decision not to build ten other things. That discipline — applied consistently over time — produces products that are easier to understand, easier to maintain, and easier to love.</p>
+
+    <h2>What This Actually Changes</h2>
+
+    <p>I'm not arguing that you should starve your team. Resources matter. Good engineering talent, time to do discovery properly, bandwidth to instrument and measure — these things are not luxuries. The lesson isn't to embrace deprivation.</p>
+
+    <p>The lesson is that constraints are information. When you don't have them naturally, you should create them artificially. <strong>Set a deadline before you know how long the work will take. Limit the scope before you know everything you'd like to include. Force the prioritization conversation before you feel ready to have it.</strong> The discomfort of artificial constraints is exactly the discomfort of having to develop judgment — and judgment is the thing that doesn't atrophy when the resources eventually arrive.</p>
+
+    <p>The product managers I've watched compound over time aren't the ones who always had the best tooling or the biggest teams. They're the ones who developed genuine conviction about what matters — usually from some period of having to decide without the safety net of being able to test everything.</p>
+
+    <p>Constraints are a teacher that abundance never quite replaces. The lucky ones learn that early.</p>
+
+  </div>
+
+  <div class="post-footer">
+    <a href="../index.html#learning" class="back-btn">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to writing
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-l">Nahom<span> Mekonen</span></div>
+  <div class="footer-r">2025</div>
+</footer>
+
+</body>
+</html>
