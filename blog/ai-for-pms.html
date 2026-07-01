@@ -3,231 +3,198 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How I Use Claude to Run Product Faster — Nahom Mekonen</title>
-  <meta name="description" content="Most PMs use AI to write faster. That's the wrong goal. Here's how to use Claude to raise the quality of your thinking.">
+  <title>How I Use Claude to Run Product · Nahom Mekonen</title>
+  <meta name="description" content="Most PMs reach for AI to write faster. Wrong goal. Here is how I use Claude to raise the quality of my thinking.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #F8F5EF; --bg-card: #FFFFFF; --bg-dark: #1C1814;
-      --text: #1C1814; --text-muted: #7A726A; --text-light: #B5ADA4;
-      --accent: #C4612A; --accent-warm: #E07A45; --accent-bg: #FDF0E6;
-      --border: #E5DDD3; --serif: 'Fraunces', Georgia, serif;
-      --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --tr: 0.25s cubic-bezier(0.4,0,0.2,1);
+      --paper:#F7F6F2; --doc:#FFFFFF; --ink:#18181B; --ink-soft:#56564F;
+      --faint:#9C9C93; --rule:#E6E5DD; --rule-2:#EFEEE7;
+      --mark:#FFE45E; --mark-line:#E8C200; --live:#2FA84F;
+      --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+      --serif:'Source Serif 4',Georgia,serif;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
-    a { color: inherit; text-decoration: none; }
+    *,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:var(--serif); background:var(--paper); color:var(--ink); line-height:1.7; font-size:18px; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; text-decoration:none; }
+    ::selection { background:var(--mark); }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 0 32px; height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(248,245,239,0.92); backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-family: var(--serif); font-size: 21px; font-weight: 600; letter-spacing: -0.5px; }
-    .nav-logo span { color: var(--accent); }
-    .back-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500; color: var(--text-muted); transition: color var(--tr); }
-    .back-link:hover { color: var(--text); }
+    .toolbar { position:fixed; top:0; left:0; right:0; z-index:120; height:46px; display:flex; align-items:center; justify-content:space-between; padding:0 18px; background:rgba(247,246,242,0.86); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--rule); font-family:var(--mono); font-size:12px; color:var(--ink-soft); }
+    .tb-left { display:flex; align-items:center; gap:14px; min-width:0; }
+    .tb-back { display:inline-flex; align-items:center; gap:7px; color:var(--ink); }
+    .tb-back:hover { color:var(--mark-line); }
+    .tb-file { color:var(--faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .tb-btn { font-family:var(--mono); font-size:11.5px; color:var(--ink); border:1px solid var(--ink); border-radius:4px; padding:5px 11px; background:var(--doc); cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:background .18s,color .18s; }
+    .tb-btn:hover { background:var(--ink); color:var(--paper); }
 
-    .post-wrap { max-width: 680px; margin: 0 auto; padding: 112px 32px 96px; }
+    .post-wrap { max-width:700px; margin:0 auto; padding:92px 28px 80px; }
+    .post-kicker { font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mark-line); margin-bottom:16px; }
+    .post-meta { font-family:var(--mono); font-size:12px; color:var(--faint); margin-bottom:22px; display:flex; gap:10px; flex-wrap:wrap; }
+    .post-meta .dot { color:var(--rule); }
+    h1.post-title { font-family:var(--mono); font-size:clamp(26px,4vw,37px); font-weight:600; line-height:1.14; letter-spacing:-.02em; margin-bottom:18px; }
+    .post-subtitle { font-family:var(--serif); font-size:19px; line-height:1.55; color:var(--ink-soft); }
+    .post-divider { border:none; border-top:1px solid var(--ink); margin:26px 0 34px; }
 
-    .post-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
-    .post-cat { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-    .post-date { font-size: 12px; color: var(--text-light); }
-    .post-read { font-size: 12px; color: var(--text-light); }
-    .dot { color: var(--text-light); }
+    .post-body h2 { font-family:var(--mono); font-size:18px; font-weight:600; letter-spacing:-.01em; color:var(--ink); margin:42px 0 14px; }
+    .post-body h2::before { content:'# '; color:var(--mark-line); font-weight:500; }
+    .post-body p { font-size:18px; line-height:1.72; color:#2b2b28; margin-bottom:18px; }
+    .post-body p strong { color:var(--ink); font-weight:600; }
+    .post-body p em { font-style:italic; }
+    .post-body ul { list-style:none; margin:6px 0 20px; padding:0; display:flex; flex-direction:column; gap:11px; }
+    .post-body li { position:relative; padding-left:24px; font-size:16.5px; line-height:1.6; color:#2b2b28; }
+    .post-body li::before { content:'\2192'; position:absolute; left:0; top:1px; font-family:var(--mono); font-size:13px; color:var(--mark-line); }
+    .post-body li strong { color:var(--ink); font-weight:600; }
 
-    h1.post-title {
-      font-family: var(--serif); font-size: clamp(32px, 5vw, 50px);
-      font-weight: 500; line-height: 1.1; letter-spacing: -0.025em;
-      margin-bottom: 20px;
-    }
-    .post-subtitle { font-size: 18px; line-height: 1.7; color: var(--text-muted); margin-bottom: 44px; font-weight: 300; }
+    blockquote { border-left:3px solid var(--mark); padding:2px 0 2px 20px; margin:28px 0; font-family:var(--serif); font-size:21px; line-height:1.5; font-style:italic; color:var(--ink); }
 
-    .post-divider { border: none; border-top: 1px solid var(--border); margin: 44px 0; }
+    .callout { border:1px solid var(--rule); border-left:3px solid var(--mark-line); background:var(--doc); border-radius:6px; padding:18px 22px; margin:28px 0; }
+    .callout p { margin-bottom:0; font-size:16px; color:#2b2b28; }
+    .callout p strong { color:var(--ink); }
 
-    .post-body h2 {
-      font-family: var(--serif); font-size: clamp(22px, 3vw, 28px);
-      font-weight: 500; line-height: 1.2; letter-spacing: -0.015em;
-      margin: 52px 0 18px;
-    }
-    .post-body h3 {
-      font-family: var(--serif); font-size: 19px; font-weight: 500;
-      line-height: 1.3; letter-spacing: -0.01em; margin: 36px 0 14px;
-    }
-    .post-body p { font-size: 16px; line-height: 1.85; color: var(--text-muted); margin-bottom: 22px; }
-    .post-body p strong { color: var(--text); font-weight: 600; }
-    .post-body p em { font-style: italic; }
-    .post-body ul, .post-body ol { margin: 0 0 22px 0; padding-left: 0; list-style: none; }
-    .post-body li { font-size: 16px; line-height: 1.82; color: var(--text-muted); padding-left: 22px; position: relative; margin-bottom: 10px; }
-    .post-body li::before { content: '–'; position: absolute; left: 0; color: var(--accent); }
+    .workflow-card { background:var(--doc); border:1px solid var(--rule); border-radius:8px; padding:18px 22px; margin-bottom:14px; }
+    .workflow-card h4 { font-family:var(--mono); font-size:14px; font-weight:600; margin-bottom:8px; color:var(--ink); }
+    .workflow-card p { font-size:15.5px; line-height:1.6; color:var(--ink-soft); margin-bottom:0; }
 
-    blockquote {
-      border-left: 3px solid var(--accent); padding: 6px 24px; margin: 36px 0;
-      font-family: var(--serif); font-size: 20px; line-height: 1.6; font-style: italic;
-      color: var(--text);
-    }
+    .post-footer { margin-top:48px; padding-top:28px; border-top:1px solid var(--rule); }
+    .back-btn { font-family:var(--mono); display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--ink); border:1px solid var(--ink); border-radius:6px; padding:9px 16px; transition:background .18s,color .18s; }
+    .back-btn:hover { background:var(--ink); color:var(--paper); }
 
-    .callout {
-      background: var(--accent-bg); border: 1px solid rgba(196,97,42,0.2);
-      border-radius: 12px; padding: 24px 28px; margin: 32px 0;
-    }
-    .callout p { margin-bottom: 0; font-size: 15px; color: var(--text); }
-    .callout p strong { color: var(--accent); }
+    footer { border-top:1px solid var(--rule); padding:18px 28px; display:flex; align-items:center; justify-content:space-between; font-family:var(--mono); font-size:11px; color:var(--faint); }
+    .footer-l { color:var(--ink-soft); }
 
-    .workflow-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 12px; padding: 24px 28px; margin-bottom: 16px;
-    }
-    .workflow-card h4 { font-family: var(--serif); font-size: 17px; font-weight: 500; margin-bottom: 8px; }
-    .workflow-card p { font-size: 14.5px; line-height: 1.75; color: var(--text-muted); margin-bottom: 0; }
-
-    .post-footer { margin-top: 64px; padding-top: 44px; border-top: 1px solid var(--border); }
-    .back-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 13.5px; font-weight: 600; color: var(--accent);
-      border: 1.5px solid var(--accent); border-radius: 100px; padding: 10px 22px;
-      transition: background var(--tr), color var(--tr);
-    }
-    .back-btn:hover { background: var(--accent); color: #fff; }
-
-    footer { border-top: 1px solid var(--border); padding: 26px 32px; display: flex; align-items: center; justify-content: space-between; }
-    .footer-l { font-family: var(--serif); font-size: 14.5px; color: var(--text-muted); }
-    .footer-l span { color: var(--accent); }
-    .footer-r { font-size: 12px; color: var(--text-light); }
-
-    @media (max-width: 640px) {
-      .post-wrap { padding: 100px 20px 72px; }
-      nav { padding: 0 20px; }
-      footer { flex-direction: column; gap: 8px; text-align: center; }
-    }
+    @media (max-width:640px) { .post-wrap { padding:80px 18px 64px; } .toolbar .tb-file { display:none; } }
+    @media print { .toolbar,.post-footer { display:none; } body { background:#fff; } .post-wrap { padding:0; max-width:100%; } a { color:#000; } }
+    @media (prefers-reduced-motion:reduce) { * { transition:none !important; } html { scroll-behavior:auto; } }
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="../index.html" class="nav-logo">N<span>.</span>M</a>
-  <a href="../index.html#learning" class="back-link">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Back to writing
-  </a>
-</nav>
+<div class="toolbar">
+  <div class="tb-left">
+    <a href="../index.html#appendix" class="tb-back">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      back to spec
+    </a>
+    <span class="tb-file">~/notes/ai-for-pms.md</span>
+  </div>
+  <button class="tb-btn" onclick="window.print()">
+    <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1v7M3.8 5.3 7 8.5l3.2-3.2M2 11.5h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Export PDF
+  </button>
+</div>
 
 <div class="post-wrap">
+  <div class="post-kicker">Note · Product &amp; AI</div>
   <div class="post-meta">
-    <span class="post-cat">Product & AI</span>
+    <span>March 2025</span>
     <span class="dot">·</span>
-    <span class="post-date">March 2025</span>
-    <span class="dot">·</span>
-    <span class="post-read">7 min read</span>
+    <span>7 min read</span>
   </div>
 
-  <h1 class="post-title">How I Use Claude to Run Product Faster — Without Losing the Judgment That Actually Matters</h1>
-  <p class="post-subtitle">Most PMs use AI to write faster. That's the wrong goal. The real leverage is in the quality of your thinking — and that's a different problem entirely.</p>
+  <h1 class="post-title">How I Use Claude to Run Product Without Outsourcing the Judgment</h1>
+  <p class="post-subtitle">Most PMs reach for AI to write faster. Wrong goal. The leverage sits in the quality of your thinking, and that is a harder problem.</p>
 
   <hr class="post-divider">
 
   <div class="post-body">
 
-    <p>There's a version of this essay that would tell you about the five AI prompts that transformed my workflow. I'm not going to write that essay. It would be dishonest, and more importantly, it would miss the point.</p>
+    <p>Skip the listicle. The five prompts that transformed my workflow do not exist. What changed for me was smaller and slower to see, and it has held up.</p>
 
-    <p>The honest version starts here: I was skeptical of AI tools for a long time. Not because I doubted the technology — I have a CS background and spent years building technical integrations. I was skeptical because most of what I saw PMs doing with AI was generating faster versions of output that wasn't that valuable to begin with. Faster PRDs full of fluff. Polished user stories that still missed the actual user insight. Decks that looked great and said nothing.</p>
+    <p>I was skeptical of AI tools for years. Not the technology. I have a CS background and spent years building integrations that had to work in production. I was skeptical because most PMs used AI to make faster versions of work that was thin to begin with. PRDs full of filler. User stories polished to a shine that still missed the actual user.</p>
 
-    <p><strong>Speed applied to the wrong thing is still the wrong thing.</strong></p>
+    <p><strong>Speed on the wrong work is still the wrong work.</strong></p>
 
-    <blockquote>"The question isn't whether AI can write your PRD. It's whether it can help you think more clearly about what belongs in it."</blockquote>
+    <blockquote>"Forget whether AI can write your PRD. Ask whether it makes you clearer about what belongs in it."</blockquote>
 
     <h2>What Changed My Mind</h2>
 
-    <p>When I started using Claude seriously, I wasn't using it to write. I was using it to argue.</p>
+    <p>The first time I used Claude seriously, I did not use it to write. I used it to argue.</p>
 
-    <p>I'd been working on a product decision at Kabba — whether to prioritize the corporate B2B tier or double down on individual commuter retention. Both had compelling cases. Both had data behind them. I was going in circles. So I opened a Claude session and explained the situation like I was briefing a smart colleague who knew nothing about the context.</p>
+    <p>I was stuck on a call at Kabba. Prioritize the corporate B2B tier or double down on commuter retention. Both had a case. Both had data. I was going in circles, so I opened a session and briefed Claude like a sharp colleague who knew none of the context.</p>
 
-    <p>What came back wasn't a recommendation. It was three questions I hadn't asked myself. One of them — about the structural difference in purchase decision timelines between a commuter and a corporate HR director — reframed the entire analysis. The corporate buyer had a longer sales cycle but made a single decision that committed an entire company. The individual commuter decided every single morning. <strong>Those aren't two versions of the same product decision. They're two different businesses.</strong></p>
+    <p>What came back was not a recommendation. It was three questions I had not asked myself. One of them, about the difference in purchase timelines between a commuter and a corporate HR director, reframed the whole analysis. The corporate buyer ran a long sales cycle and made one decision that committed a whole company. The commuter decided again every morning. <strong>Those are not two versions of one product decision. They are two different businesses.</strong></p>
 
-    <p>That's when I understood what the tool was actually for. Not output generation. Thinking acceleration.</p>
+    <p>That is when it clicked. I had been using the thing to think, and the thinking was the entire value.</p>
 
-    <h2>The Workflows That Actually Move the Needle</h2>
+    <h2>The Workflows That Earn Their Keep</h2>
 
-    <p>I've used Claude consistently across product work for about a year now. The uses that have genuinely mattered fall into four categories:</p>
+    <p>I have run Claude across product work for about a year. Four uses have earned a permanent place.</p>
 
     <div class="workflow-card">
       <h4>1. Pre-Meeting Preparation</h4>
-      <p>Before any important stakeholder conversation — an executive review, a cross-functional alignment session, a partner negotiation — I brief Claude on the context and ask it to steel-man the strongest objections I'm likely to face. Not to prepare scripted responses, but to make sure I've actually thought through the counterarguments before I'm in the room. The number of times this has surfaced a gap I hadn't considered is embarrassing in retrospect.</p>
+      <p>Before a stakeholder conversation that matters, an executive review or a partner negotiation, I brief Claude and ask it to steel-man the hardest objections coming my way. I am not after scripted answers. I want to have met the counterargument before I walk in. The number of gaps this surfaces is embarrassing in hindsight.</p>
     </div>
 
     <div class="workflow-card">
       <h4>2. Discovery Synthesis</h4>
-      <p>After a round of user interviews, I paste my raw notes and ask Claude to identify the patterns, contradictions, and missing questions. This isn't about having the AI do the analysis — it's about using it as a structured sounding board that forces me to externalize and organize what I actually heard. The act of explaining findings clearly enough for an outside reader consistently reveals gaps in my own understanding.</p>
+      <p>After a round of interviews I paste the raw notes and ask Claude to find the patterns, the contradictions, the questions I forgot to ask. The model is not doing the analysis. It is a sounding board that forces me to externalize what I heard. Explaining findings clearly enough for an outsider exposes the holes in my own understanding every time.</p>
     </div>
 
     <div class="workflow-card">
-      <h4>3. PRD First-Draft Pressure Testing</h4>
-      <p>I write the PRD. Then I ask Claude to respond as a skeptical senior engineer who's been burned by underspecified requirements before. The feedback it generates is often obvious in retrospect — but obvious-in-retrospect is exactly the category of issue that causes return trips for clarification. Better to find them before the sprint kicks off.</p>
+      <h4>3. PRD Pressure Testing</h4>
+      <p>I write the PRD. Then I tell Claude to read it as a senior engineer who has been burned by vague specs before. The feedback is usually obvious in hindsight, which is exactly the kind of gap that sends engineers back to my desk mid-sprint. I would rather find it the night before.</p>
     </div>
 
     <div class="workflow-card">
       <h4>4. Decision Documentation</h4>
-      <p>When I make a significant product call, I use Claude to help me write a clean decision record: what we decided, what we considered, what data we had, what we're trading off. Not for the record — for my own thinking clarity. If I can't explain a decision clearly enough for a smart outsider to understand the reasoning, I haven't thought it through well enough to make it yet.</p>
+      <p>When I make a real product call, I have Claude help me write a clean decision record. What we chose, what we weighed, what data we had, what we traded away. The record is for my own clarity. If I cannot explain a decision well enough for a smart outsider to follow the reasoning, I have not earned the right to make it yet.</p>
     </div>
 
     <h2>What It Can't Do (And Shouldn't)</h2>
 
-    <p>Here's what I've learned not to outsource:</p>
+    <p>Some of the job does not move.</p>
 
-    <p><strong>Judgment about what matters.</strong> Claude can help me analyze a set of options. It cannot tell me which one matters more, because that answer is embedded in organizational context, relationship dynamics, and strategic priorities that live entirely in my head. The moment you let AI make prioritization decisions for you, you've given up the most important part of the job.</p>
+    <p><strong>Judgment about what matters.</strong> Claude can lay out the options. It cannot tell me which one matters more. That answer lives in organizational context, in relationships, in strategy that exists only in my head. Hand prioritization to a model and you have given away the core of the job.</p>
 
-    <p><strong>User insight from lived experience.</strong> The insight that drove Kabba's commitment architecture — that commuters needed predictability, not just reliability, and that a booking fee was actually a trust mechanism — didn't come from analysis. It came from riding a minibus at 7am and watching what happened when one didn't show up. No language model replaces the physical experience of being a user of your own product.</p>
+    <p><strong>User insight from lived experience.</strong> The insight behind Kabba's commitment architecture, that commuters needed predictability and that a booking fee read as a trust signal, did not come from analysis. It came from standing on a curb at 7am when the minibus never showed. No model gives you that.</p>
 
-    <p><strong>Stakeholder relationships.</strong> The trust that makes cross-functional work possible is built in conversations, over time, through demonstrated judgment and follow-through. AI can help you prepare for those conversations. It cannot have them for you.</p>
+    <p><strong>Stakeholder relationships.</strong> Trust gets built in conversations, over time, through judgment people watched you exercise. Claude can prep you for the room. It cannot sit in your chair.</p>
 
-    <h2>For Your Team — Not Just Yourself</h2>
+    <h2>The Bigger Win Is Team Time</h2>
 
-    <p>The most underused application of Claude in PM work isn't personal productivity. It's <strong>team leverage.</strong></p>
+    <p>The most underused move with Claude in PM work has nothing to do with personal productivity. It gives time back to the whole <strong>team.</strong></p>
 
-    <p>Think about the amount of time your team spends on low-leverage writing: meeting summaries, status updates, stakeholder briefings, documentation of decisions everyone already knows were made. Every hour spent on that is an hour not spent on discovery, analysis, or the kind of thinking that actually advances the product.</p>
+    <p>Count the hours your team burns on low-leverage writing. Meeting summaries, status updates, briefings, records of decisions everyone already remembers. Every one of those hours is an hour stolen from discovery and the thinking that actually moves the product.</p>
 
-    <p>Here's how I've used Claude to give that time back:</p>
+    <p>A few ways I claw it back:</p>
 
     <ul>
-      <li><strong>Sprint retrospective synthesis.</strong> Feed the raw notes from a retro into Claude and ask it to surface patterns across the four quadrants. Turns a 45-minute synthesis exercise into a 10-minute review.</li>
-      <li><strong>Async decision alignment.</strong> When a decision needs to go to multiple stakeholders for input, have Claude draft the decision brief. The draft will be ~70% right. What matters is that everyone responds to the same framing — it removes the interpretation variance that kills async alignment.</li>
-      <li><strong>Onboarding new team members.</strong> Building a context document for a new engineer or designer? Ask Claude to structure the information you already have. You'll still need to fill in the substance — but the structure you'd otherwise spend hours on is done in minutes.</li>
-      <li><strong>Spec review before engineering handoff.</strong> Have Claude review a spec as a critical engineer before it goes to the actual engineers. It catches the category of obvious gaps faster than you will after writing the document yourself.</li>
+      <li><strong>Sprint retrospective synthesis.</strong> Feed in the raw retro notes and ask for the patterns across the board. A 45-minute synthesis turns into a 10-minute review.</li>
+      <li><strong>Async decision alignment.</strong> When a call needs input from several stakeholders, have Claude draft the brief. It lands around 70% right. The point is that everyone reacts to the same framing, which kills the interpretation drift that wrecks async alignment.</li>
+      <li><strong>Onboarding.</strong> Building a context doc for a new engineer or designer, I have Claude structure what I already know. I still supply the substance. The scaffolding that used to eat an afternoon is done in minutes.</li>
+      <li><strong>Spec review before handoff.</strong> Claude reads the spec as a hostile engineer before the real ones do. It catches the obvious gaps faster than I will, fresh off writing the thing.</li>
     </ul>
 
-    <p>The pattern across all of these: <strong>use AI for the structured work so humans can focus on the judgment work.</strong> The goal is never to automate product management. The goal is to give the people doing it more time to do it well.</p>
+    <p>The pattern holds throughout. <strong>Let the model carry the structured work so people spend their hours on judgment.</strong> I am not trying to automate product management. I am trying to buy the people doing it more room to do it well.</p>
 
     <h2>The Real Leverage</h2>
 
-    <p>I've been thinking about this through the lens of what makes a good PM genuinely hard to replace. It's not writing ability. It's not even analytical skill. It's the capacity to hold context across a complex product and organizational landscape, make judgment calls under uncertainty, and move a diverse set of stakeholders toward a shared direction.</p>
+    <p>What makes a PM hard to replace is rarely writing or raw analysis. It is holding a messy product and a messy org in your head at once, calling it under uncertainty, and pulling a room of people who want different things toward one direction.</p>
 
-    <p>AI makes you faster at the parts that aren't those things. Which means — if you use it right — it gives you more time and cognitive bandwidth for the parts that are.</p>
+    <p>AI makes you faster at everything else. Used well, that hands you back the time and the head space for the part only you can do.</p>
 
-    <p>That's the leverage. Not a faster PRD. More space to think clearly about the problem the PRD is trying to solve.</p>
+    <p>That is the leverage. A quicker PRD was never the prize. The prize is room to think clearly about the problem underneath it.</p>
 
-    <blockquote>"Give me six hours to chop down a tree and I will spend the first four sharpening the axe." The tool doesn't do the thinking. It buys you time to do it better.</blockquote>
+    <blockquote>"Give me six hours to chop down a tree and I will spend the first four sharpening the axe." The tool does not swing the axe. It sharpens it.</blockquote>
 
-    <p>Start with one workflow. Not five. Pick the one where your current process has the most waste, and build from there. The PMs who will compound the most from these tools are the ones who use them to raise the floor on their own thinking — not the ones chasing the fastest output.</p>
+    <p>Start with one workflow. Find the place your process wastes the most and put it there. The PMs who compound with these tools raise the floor on their own thinking. The ones chasing fastest output plateau.</p>
 
   </div>
 
   <div class="post-footer">
-    <a href="../index.html#learning" class="back-btn">
+    <a href="../index.html#appendix" class="back-btn">
       <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M12 7H2M6 3L2 7l4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Back to writing
+      back to spec
     </a>
   </div>
 </div>
 
 <footer>
-  <div class="footer-l">Nahom<span> Mekonen</span></div>
-  <div class="footer-r">2025</div>
+  <div class="footer-l">Nahom Mekonen</div>
+  <div>~/notes</div>
 </footer>
 
 </body>
