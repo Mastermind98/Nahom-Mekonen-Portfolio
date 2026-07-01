@@ -202,6 +202,21 @@
   .notes-list a:hover { color: var(--mark-line); }
   .appx-wide { grid-column: 1 / -1; }
 
+  /* ---- COLLAPSIBLE SPECS ---- */
+  .spec-top { cursor: pointer; }
+  .spec-hint { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--mark-line); margin: 0 2px; opacity: 0; transition: opacity .3s; white-space: nowrap; align-self: center; }
+  .spec.hint:not(.open) .spec-hint { opacity: 1; }
+  .spec-caret { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--rule); display: inline-flex; align-items: center; justify-content: center; color: var(--ink-soft); flex-shrink: 0; background: var(--doc); transition: transform .3s ease, background .2s, border-color .2s, color .2s; }
+  .spec-top:hover .spec-caret { border-color: var(--ink); color: var(--ink); }
+  .spec.open .spec-caret { transform: rotate(180deg); background: var(--mark); border-color: var(--mark-line); color: var(--ink); }
+  .spec.hint:not(.open) .spec-caret { animation: caretPulse 1.6s ease-in-out infinite; border-color: var(--mark-line); color: var(--ink); }
+  @keyframes caretPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(232,194,0,0); } 50% { box-shadow: 0 0 0 6px rgba(232,194,0,0.30); background: var(--mark); } }
+  .spec-fold { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.4,0,.2,1); }
+  .spec.open .spec-fold { grid-template-rows: 1fr; }
+  .spec-fold-inner { overflow: hidden; min-height: 0; }
+  .spec .cmt { display: none; }
+  .spec.open .cmt { display: block; }
+
   /* ---- MARGIN COMMENTS (signature) ---- */
   .cmt {
     position: absolute; right: -290px; width: 256px;
@@ -656,6 +671,46 @@
   const ol = document.getElementById('outline');
   ot.addEventListener('click', () => ol.classList.toggle('open'));
   ol.querySelectorAll('a').forEach(a => a.addEventListener('click', () => ol.classList.remove('open')));
+
+  // collapsible specs
+  const caretSVG = '<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.querySelectorAll('.spec').forEach(spec => {
+    const top = spec.querySelector('.spec-top');
+    if (!top) return;
+    const hint = document.createElement('span');
+    hint.className = 'spec-hint';
+    hint.textContent = 'expand';
+    const caret = document.createElement('span');
+    caret.className = 'spec-caret';
+    caret.innerHTML = caretSVG;
+    top.append(hint, caret);
+
+    const fold = document.createElement('div');
+    fold.className = 'spec-fold';
+    const inner = document.createElement('div');
+    inner.className = 'spec-fold-inner';
+    fold.appendChild(inner);
+    const move = [];
+    let n = top.nextElementSibling;
+    while (n) { if (!n.classList.contains('cmt')) move.push(n); n = n.nextElementSibling; }
+    top.after(fold);
+    move.forEach(el => inner.appendChild(el));
+
+    top.addEventListener('click', () => {
+      const open = spec.classList.toggle('open');
+      spec.classList.remove('hint');
+      if (open) { const c = spec.querySelector('.cmt'); if (c) c.classList.add('in'); }
+    });
+  });
+
+  // pulse hint when a collapsed spec scrolls into view
+  const hintObs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.target.classList.contains('open')) return;
+      e.target.classList.toggle('hint', e.isIntersecting);
+    });
+  }, { threshold: 0.35 });
+  document.querySelectorAll('.spec').forEach(s => hintObs.observe(s));
 </script>
 </body>
 </html>
