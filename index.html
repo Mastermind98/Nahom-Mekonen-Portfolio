@@ -237,6 +237,24 @@
   .cmt-foot { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 8px; display: flex; align-items: center; gap: 5px; }
   .cmt-foot .rs { color: var(--live); }
 
+  /* ---- NORTH STAR ---- */
+  .northstar { border: 1px solid var(--ink); border-radius: 10px; background: var(--ink); color: var(--paper); padding: 30px 36px 28px; margin-bottom: 40px; position: relative; overflow: hidden; }
+  .northstar .doc-kicker { color: var(--mark); margin-bottom: 6px; }
+  .northstar .ns-sub { font-family: var(--mono); font-size: 11.5px; color: rgba(255,255,255,.5); margin-bottom: 24px; }
+  .northstar blockquote { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2.6vw, 25px); line-height: 1.42; color: #fff; margin: 0 0 16px; letter-spacing: -.01em; }
+  .northstar blockquote .em { background: linear-gradient(transparent 60%, rgba(255,228,94,.32) 0); }
+  .northstar .ns-by { font-family: var(--mono); font-size: 11.5px; color: rgba(255,255,255,.5); text-align: right; }
+  .northstar::after { content: '★'; position: absolute; top: 18px; right: 24px; color: rgba(255,228,94,.22); font-size: 22px; }
+
+  /* ---- DECISION RECORD (the call) ---- */
+  .decision { border: 1px solid var(--rule); border-left: 3px solid var(--ink); background: var(--paper); border-radius: 6px; padding: 16px 22px 8px; margin: 22px 0; }
+  .decision .tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 12px; }
+  .decision .drow { display: grid; grid-template-columns: 92px 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule-2); }
+  .decision .drow:last-child { border-bottom: none; }
+  .decision .drow .dk { font-family: var(--mono); font-size: 11.5px; color: var(--faint); padding-top: 3px; }
+  .decision .drow .dv { font-size: 15px; line-height: 1.55; color: #2b2b28; }
+  .decision .drow .dv strong { color: var(--ink); font-weight: 600; }
+
   /* mobile outline toggle */
   .otoggle { display: none; }
 
@@ -308,6 +326,7 @@
   <!-- ===== OUTLINE ===== -->
   <nav class="outline" id="outline">
     <div class="outline-h">Document outline</div>
+    <a href="#northstar"><span class="num">★</span> North star</a>
     <a href="#tldr"><span class="num">0.0</span> TL;DR</a>
     <a href="#background"><span class="num">1.0</span> Background</a>
     <a href="#users"><span class="num">2.0</span> Thesis</a>
@@ -329,20 +348,31 @@
     <header class="title-block">
       <div class="doc-kicker">Product Spec · Personal</div>
       <h1 class="doc-title">Nahom Mekonen</h1>
+      <p class="doc-sub">Most portfolios show you the product. This one shows the calls behind it: the tradeoffs, the bets, the builds that did not survive. The why and the how of how I work.</p>
       <div class="meta-grid">
         <div class="meta-row"><span class="k">Author</span><span class="v">Nahom Mekonen</span></div>
         <div class="meta-row"><span class="k">Status</span><span class="v"><span class="live">●</span> Open to offers</span></div>
         <div class="meta-row"><span class="k">Role</span><span class="v">Product Manager</span></div>
         <div class="meta-row"><span class="k">Version</span><span class="v">2026.2</span></div>
         <div class="meta-row"><span class="k">Location</span><span class="v">Minneapolis · remote ok</span></div>
+        <div class="meta-row"><span class="k">Method</span><span class="v">go and see for myself</span></div>
+        <div class="meta-row"><span class="k">Bias</span><span class="v">shipping over guessing</span></div>
         <div class="meta-row"><span class="k">Reviewers</span><span class="v">teams past zero</span></div>
       </div>
     </header>
 
+    <!-- NORTH STAR -->
+    <section class="northstar" id="northstar">
+      <div class="doc-kicker">My north star</div>
+      <div class="ns-sub">behind every product decision I make</div>
+      <blockquote>The job of a product manager is to understand the problem so deeply, and live so far into the customer's future, that you <span class="em">build what they will need before they know to ask for it</span>.</blockquote>
+      <div class="ns-by">— the bar I hold myself to</div>
+    </section>
+
     <!-- 0. TL;DR -->
     <section class="sec" id="tldr">
       <div class="sec-head"><span class="sec-num">0.0</span><span class="sec-title">TL;DR</span></div>
-      <p class="lede">What I care about most is making transportation work for people it was never really built for. Over the past five years I have been lucky to help move more than a million riders in Ethiopia and route ten thousand students here in the US. It is the hardest and most meaningful work I have done, and I am only getting deeper into it.</p>
+      <p class="lede">This is a problem I grew up inside. I watched my parents and relatives lose hours every week to transportation that was never built for them. I came to the US, studied computer science, and graduated with offers most people would take without thinking twice. Then I went home, found the same problem sitting exactly where I had left it, still unsolved and mostly ignored, and the offers stopped making sense. So I went back to work on it. That was five years ago. Building a real product in a market this hard has taught me more than a stable job at a big company ever could. What I care about, underneath all of it, is not transportation by itself. It is finding a problem that matters to real people and staying on it until it gives.</p>
       <div class="scorebar">
         <div class="cell"><div class="n">1M+</div><div class="l">riders moved</div></div>
         <div class="cell"><div class="n">10K+</div><div class="l">students routed</div></div>
@@ -351,17 +381,17 @@
       </div>
       <div class="callout">
         <span class="tag">Why I care</span>
-        <p>Reliable transportation quietly decides where people can work, what they can earn, and how a city grows. Once I saw that up close, I could not unsee it. It is the problem I most want to keep working on.</p>
+        <p>I did not pick this problem off a whiteboard. It picked me a long time ago, at home, watching people I love work around something that should have just worked. That is also why the specific domain matters less to me than people expect. Once you have felt a problem that closely, you want to give the next one the same attention, whatever it turns out to be.</p>
       </div>
     </section>
 
     <!-- 1. BACKGROUND -->
     <section class="sec" id="background">
       <div class="sec-head"><span class="sec-num">1.0</span><span class="sec-title">Background</span></div>
-      <p>I came to the US from Ethiopia to study computer science. I thought I would become a software engineer, but somewhere in college growth marketing pulled me in, and I started building small direct to consumer brands out of my dorm.</p>
-      <p>That turned into <strong>Radium Media</strong>. Over three years it grew to $30M in sales with no outside money, and it taught me more than any class did. When I graduated I had offers from big companies, and I am grateful I got them, but there was a problem back home I could not stop thinking about.</p>
-      <p>So I went back to Ethiopia. The countries growing fastest in the world run on transportation that was built decades ago, when it was built at all. Getting that right changes how millions of people live and work every day. I wanted to spend my energy there.</p>
-      <p>That became <strong>Kabba</strong>, where we are building public transit where there was almost none. Before I wrote a single requirement, I rode the minibuses for weeks as a commuter, because I did not want to guess at a problem I could go and live instead. Later I built <strong>LinQ</strong> for the same reason, since the same struggle follows kids to school, here and back home.</p>
+      <p>I came to the US from Ethiopia to study computer science, sure I would end up an engineer. Growth marketing pulled me sideways in college, and I started building small direct to consumer brands out of my dorm room.</p>
+      <p>That turned into <strong>Radium Media</strong>. Over three years it did $30M in sales with no outside money. It taught me more than my classes did: how to sell, how people actually decide and behave, and how to build a team and scale a product. I graduated with offers from good companies. I kept thinking about a problem back home instead.</p>
+      <p>So I went back to Ethiopia. Some of the fastest growing countries on earth run on transportation that was built decades ago, when it was built at all. Fixing that changes how millions of people live and work. I wanted to put my energy there.</p>
+      <p>That became <strong>Kabba</strong>. We are building public transit in a place that had almost none. I rode the minibuses for weeks as an ordinary commuter before I wrote anything down, because I would rather live a problem than guess at it. <strong>LinQ</strong> came later and closer to home. I saw the same struggle in my own community here in the US, small transportation companies moving thousands of kids with paper and phone calls, so I spent my weekends building them a tool to run their cars and routes, and gave it to them for free.</p>
 
       <div class="cmt" data-anchor>
         <div class="cmt-head"><span class="cmt-av">NM</span><span class="cmt-who">Nahom</span><span class="cmt-when">field note</span></div>
@@ -373,21 +403,21 @@
     <!-- 2. USERS -->
     <section class="sec" id="users">
       <div class="sec-head"><span class="sec-num">2.0</span><span class="sec-title">Thesis</span></div>
-      <p>I choose to work in emerging markets because that is where the need is greatest and, honestly, where the work feels most worth doing. These economies are growing fast on transport systems that have not kept up, and closing that gap matters to real people every single day.</p>
-      <p>It is also genuinely hard, and I have a lot of respect for how hard. A few things I had to learn on the ground:</p>
+      <p>I am a builder before I am anything else. I am drawn to problems you can actually touch, the kind a real person feels on a real morning, and I like staying with one long enough to move it. That thread runs through everything I have done, from selling products out of a dorm room to owning product for a transit company. The domain keeps changing. The way I approach it does not.</p>
+      <p>How I work is easy to say and hard to do. I go to where the problem lives before I write anything down. I look for the job people are actually trying to get done, which is almost never the feature they asked for. Then I put the smallest useful version in their hands, watch what really happens, and let the evidence decide what comes next.</p>
       <ul class="ticks">
-        <li><strong>Cash economies</strong> with little card use, so payments were something we had to design from scratch, not a service to plug in.</li>
-        <li><strong>Regulation that runs through government,</strong> where every launch started as a conversation, not a release.</li>
-        <li><strong>Low digital trust,</strong> where we earned adoption slowly, one honest interaction at a time.</li>
-        <li><strong>Infrastructure I could not assume,</strong> from maps to power to the roads themselves.</li>
+        <li><strong>Live the problem before I build.</strong> I will spend two weeks as a user before I spend two months guessing. I rode the minibuses and I sat with the dispatchers.</li>
+        <li><strong>Find the real job.</strong> People rarely want the feature they name. They want the outcome underneath it, and that is what I design toward.</li>
+        <li><strong>Ship small and let reality vote.</strong> A rough version in someone's hands teaches me more than a flawless spec ever has.</li>
+        <li><strong>Measure what changes a decision.</strong> If a number will not change what we do next, I leave it alone.</li>
       </ul>
-      <p>Building through all of that changed how I think about product. It made me more patient, more careful about what actually matters, and a lot more grateful when something finally works.</p>
+      <p>Most of this I learned the hard way, building in a market where I could not take card payments or reliable maps for granted. It left me allergic to assumptions. I hold my own ideas loosely and the problem tightly, and getting corrected early by a real user beats defending a tidy plan that was wrong all along. That is the kind of product person I am, and the kind of team I want to build with.</p>
     </section>
 
     <!-- 3. SHIPPED -->
     <section class="sec" id="shipped">
       <div class="sec-head"><span class="sec-num">3.0</span><span class="sec-title">What I've shipped</span></div>
-      <p>Three things I have built. For each, the problem, the calls we made, what happened, and what I would do differently.</p>
+      <p>Three things I have built. For each: the problem, the hardest call I made and what I traded for it, what happened, and what I would do differently. The metrics are here, but the calls are the point.</p>
 
       <!-- 3.1 KABBA -->
       <div class="spec" id="kabba">
@@ -395,7 +425,7 @@
           <div class="spec-logo"><img src="images/kabba-logo.svg" alt="Kabba Transport" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'lt',textContent:'K'}))"></div>
           <div>
             <div class="spec-name">Kabba Transport</div>
-            <div class="spec-tag">Series A mass transit · Addis Ababa</div>
+            <div class="spec-tag">Mass transit startup · Addis Ababa</div>
           </div>
           <div class="spec-id">KB-021</div>
         </div>
@@ -406,11 +436,19 @@
           <div><span class="k">surface:</span> rider · driver · operator</div>
         </div>
         <div class="spec-body">
-          <p class="lede">Kabba is the company I care about most. We are building shared mass transit for Addis Ababa, a city where about five million people move every day with no real system built for them. Not ride hailing, not a taxi app. Actual commuter infrastructure: fixed routes, subscriptions, predictable pricing.</p>
+          <p class="lede">Kabba is the company I care about most. We build shared mass transit for Addis Ababa, a city where about five million people move every day with no system built for them. Think of it as a subway that happens to run on minibuses, not another ride hailing app. Fixed routes, monthly subscriptions, and prices that do not move on you.</p>
 
           <div class="sub-head"># the problem</div>
-          <p>Before I wrote a single requirement, I rode the informal minibuses for weeks, as someone living the problem rather than studying it. The insight that reorganized everything for me: <strong>the job is not "get a ride." It is "start work on time, every day, without wondering whether I will make it."</strong> Once I saw the job that way, the product decisions started to line up behind it.</p>
-          <p>Ride hailing had already arrived. It solved reliability, then priced itself out of the working professional's day. The informal minibuses had the opposite problem. Affordable, but no structure, no predictability, no trust. Nobody had built the thing in between, and that is what we set out to do.</p>
+          <p>I rode the informal minibuses for weeks before writing a single requirement, living the problem instead of studying it. The reframe that reorganized everything: <strong>people were not buying a ride. They were buying the confidence that they would clock in on time tomorrow, and the day after that.</strong> Once the job read that way, most of the product decisions answered themselves.</p>
+          <p>Ride hailing had already arrived. It fixed reliability, then priced itself out of a working person's daily commute. The minibuses were the opposite: cheap, but you could not count on them for anything. Nobody had built the middle, so we did.</p>
+
+          <div class="sub-head"># the call</div>
+          <div class="decision">
+            <span class="tag">Decision record</span>
+            <div class="drow"><div class="dk">chose</div><div class="dv">Fix the reconciliation bottleneck no one could see before we added a single new fleet.</div></div>
+            <div class="drow"><div class="dk">over</div><div class="dv">Chasing the growth number the whole room wanted to watch climb next quarter.</div></div>
+            <div class="drow"><div class="dk">the bet</div><div class="dv">We held roughly flat for a quarter while I defended a still dashboard to people who wanted it moving. When we did expand, operations held instead of buckling. <strong>It is the call I am proudest of, because it was the least popular one in the room.</strong></div></div>
+          </div>
 
           <div class="figure">
             <img src="images/kabba-van.png" alt="Kabba Transport vehicle" onerror="this.closest('.figure').style.display='none'">
@@ -425,11 +463,11 @@
           </div>
 
           <div class="sub-head"># how I worked</div>
-          <p>I owned the product end to end, from discovery to specs my engineers could ship without coming back for clarification. I was lucky to work with a 10-engineer team, and together we built for 40+ enterprise clients and 30 school partners.</p>
+          <p>I owned the product end to end, from discovery to specs an engineer could build without coming back to ask what I meant. I worked with a team of ten engineers, and together we shipped for 40+ enterprise clients and 30 school partners.</p>
           <ul class="ticks">
             <li><strong>Led product strategy and roadmap</strong> across rider, driver, and operator surfaces. Used RICE scoring to force sequencing when engineering bandwidth and operational urgency collided.</li>
-            <li><strong>Interviewed more than 100 companies</strong> and ran discovery with commuters and drivers. That work surfaced that a driver's real job was predictable income, not navigation, and I rebuilt the driver app around it.</li>
-            <li><strong>Mapped the operator workflow end to end.</strong> Financial reconciliation was the quiet bottleneck, invisible from outside but fatal to scaling, so it became the top backlog item before any fleet expansion.</li>
+            <li><strong>Interviewed more than 100 companies</strong> and ran discovery with commuters and drivers. It turned out a driver's real job was steady income, not navigation, so I rebuilt the driver app around that.</li>
+            <li><strong>Mapped the operator workflow end to end and traced the money.</strong> That is where I found the reconciliation problem, invisible from the outside, that became the call above.</li>
             <li><strong>Specified and owned the payment gateway and government API integrations,</strong> managing external technical and compliance stakeholders from brief to go live.</li>
             <li><strong>Built the B2B corporate tier from user stories up.</strong> HR directors did not want transportation. They wanted liability off their desk, and that reframe made it our highest margin product.</li>
             <li><strong>Built the analytics layer</strong> behind real time operating decisions and used it to test routes and pricing before committing to full rollout.</li>
@@ -461,13 +499,13 @@
           <div class="spec-id">LQ-024</div>
         </div>
         <div class="spec-attr">
-          <div><span class="k">type:</span> personal project</div>
+          <div><span class="k">type:</span> built solo, on weekends</div>
           <div><span class="k">status:</span> <span class="ship">shipped, live</span></div>
-          <div><span class="k">built:</span> solo</div>
+          <div><span class="k">cost to operators:</span> free</div>
           <div><span class="k">market:</span> Minnesota, North Carolina</div>
         </div>
         <div class="spec-body">
-          <p class="lede">LinQ is a side project I built because the problem kept bugging me. School buses have plenty of software. The seven-seater vans that quietly move thousands of kids every day have almost none. So I built the tool they were missing: routing, dispatch, and live tracking for the small operators that districts actually contract.</p>
+          <p class="lede">LinQ started as a side project because the problem would not leave me alone. I kept seeing it in my own community here: small transportation companies moving thousands of kids with paper and phone calls. The big yellow school buses have plenty of software. The seven-seater vans that carry those kids every day have almost none. So I spent my weekends building the tool they were missing, routing, dispatch, and live tracking to run their cars and routes, and I gave it to them for free.</p>
 
           <div class="scorebar">
             <div class="cell"><div class="n">10+</div><div class="l">transport companies</div></div>
@@ -476,14 +514,22 @@
             <div class="cell"><div class="n">live</div><div class="l">parent tracking</div></div>
           </div>
 
+          <div class="sub-head"># the call</div>
+          <div class="decision">
+            <span class="tag">Decision record</span>
+            <div class="drow"><div class="dk">chose</div><div class="dv">Build only the dispatcher's daily screen and a live map for parents.</div></div>
+            <div class="drow"><div class="dk">over</div><div class="dv">Matching the feature lists of the big school bus software.</div></div>
+            <div class="drow"><div class="dk">the constraint</div><div class="dv">I had weekends and nothing else, so I cut everything that was not the job the day revolved around. Billing and reporting waited. <strong>Operators adopted it anyway, because it did the one thing they could not do on paper.</strong></div></div>
+          </div>
+
           <div class="sub-head"># the build</div>
           <ul class="ticks">
-            <li><strong>Gave dispatchers one screen</strong> to manage drivers, routes, and student assignments, the kind of visibility big-bus software never bothered to build for type 3 fleets.</li>
+            <li><strong>Gave dispatchers one screen</strong> for drivers, routes, and student assignments, the kind of visibility the big bus software never bothered to build for type 3 fleets.</li>
             <li><strong>Put a live map in parents' hands,</strong> so they can see where their child is on the way to school. That was the part I cared about most.</li>
             <li><strong>Routed 10,000+ students</strong> for 10+ operators across Minnesota and North Carolina, turning spreadsheets and phone calls into a real system.</li>
           </ul>
 
-          <p>The part that stays with me is simple. We can track a package across an ocean, and I did not want a child to be any harder to find on the way to school.</p>
+          <p>The part that stays with me is simple. We can track a package across an ocean. A kid on the way to school should not be harder to find than that.</p>
         </div>
 
         <div class="cmt" data-anchor>
@@ -510,7 +556,7 @@
           <div><span class="k">funding:</span> none</div>
         </div>
         <div class="spec-body">
-          <p class="lede">Where it started. A creator commerce company I built and ran on one bet: creator audiences are the most loyal, high intent buyers in e-commerce, and almost nobody was building brands for them on purpose.</p>
+          <p class="lede">Where it started. A creator commerce company I built on one bet: creator audiences are the most loyal, high intent buyers in e-commerce, and almost nobody was building brands for them on purpose.</p>
 
           <div class="scorebar">
             <div class="cell"><div class="n">$30M+</div><div class="l">sales in 3 years</div></div>
@@ -520,12 +566,20 @@
           </div>
 
           <div class="sub-head"># the insight</div>
-          <p>Most companies saw a creator audience as ad inventory. I read it as a product brief. A mid tier creator with 200,000 engaged followers holds the one thing brands burn millions trying to fake: trust. So I built brands backwards. Audience first, product second, with the creator as proof the market already existed.</p>
+          <p>Most companies saw a creator's audience as ad inventory. I read it as a product brief. A mid tier creator with 200,000 engaged followers has the one thing brands spend millions trying to manufacture: trust. So I built the brands backwards, audience first and product second, with the creator as proof the market was already there.</p>
           <ul class="ticks">
             <li><strong>Built the audience persona before the product,</strong> down to how they buy and what earns their trust.</li>
             <li><strong>Validated fit before spending,</strong> A/B testing the message with each audience before scaling a dollar.</li>
             <li><strong>Turned it into a playbook</strong> that worked on the fifth brand as well as the first.</li>
           </ul>
+
+          <div class="sub-head"># the call</div>
+          <div class="decision">
+            <span class="tag">Decision record</span>
+            <div class="drow"><div class="dk">chose</div><div class="dv">Pick the audience and the creator first, then build the product to fit them.</div></div>
+            <div class="drow"><div class="dk">over</div><div class="dv">Building a product I liked and buying attention for it later.</div></div>
+            <div class="drow"><div class="dk">the bet</div><div class="dv">I passed on product ideas with no audience I could reach honestly, which made us slower to launch. <strong>In return, every brand had demand before it had inventory.</strong></div></div>
+          </div>
 
           <div class="retro">
             <span class="tag">Retro · what I learned</span>
@@ -592,7 +646,7 @@
       <div class="roadmap">
         <div class="doc-kicker">Next milestone</div>
         <h3>v.next is your team.</h3>
-        <p>I am looking for a team working on something that matters, where I can go deep, contribute, and keep learning. If that sounds like your team, I would genuinely love to talk.</p>
+        <p>I am looking for the next problem to give that same care to. Five years deep on one of them, I know how I work best: close to the people who feel it, inside a team building something that matters. If that is your team, I would like to talk.</p>
         <div class="road-links">
           <a class="k1" href="mailto:nahomendalk@gmail.com">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 5.5l6.5 4.5 6.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -657,7 +711,7 @@
       }
     });
   }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
-  document.querySelectorAll('.sec, .spec').forEach(s => { if (s.id) spy.observe(s); });
+  document.querySelectorAll('.sec, .spec, .northstar').forEach(s => { if (s.id) spy.observe(s); });
 
   // reveal margin comments
   const cObs = new IntersectionObserver(entries => {
