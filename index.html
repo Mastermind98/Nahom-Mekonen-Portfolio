@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Nahom Mekonen, Product Manager. A portfolio written as a product spec. Co-founder of Kabba Transport and Radium Media. Based in Minneapolis.">
+<meta name="description" content="Nahom Mekonen, Product Manager. A portfolio written as a product spec. Head of Product at Kabba Transport. Based in Minneapolis.">
 <title>Nahom Mekonen · Product Spec</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -100,6 +100,9 @@
 
   /* Title block */
   .title-block { border: 1px solid var(--rule); background: var(--doc); border-radius: 8px; padding: 34px 36px 30px; margin-bottom: 40px; position: relative; overflow: hidden; }
+  .headshot { position: absolute; top: 30px; right: 34px; width: 72px; height: 72px; border-radius: 50%; border: 1px solid var(--rule); background: var(--paper); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .headshot img { width: 100%; height: 100%; object-fit: cover; }
+  .headshot .ph { font-family: var(--mono); font-size: 9px; letter-spacing: .04em; color: var(--faint); text-align: center; line-height: 1.35; padding: 5px; }
   .doc-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--mark-line); margin-bottom: 14px; }
   .doc-title { font-family: var(--mono); font-size: clamp(30px, 5vw, 44px); font-weight: 600; letter-spacing: -.02em; line-height: 1.02; margin-bottom: 6px; }
   .doc-sub { font-size: 16px; color: var(--ink-soft); margin-bottom: 26px; }
@@ -163,6 +166,24 @@
   .figure { margin: 22px 0; border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--paper); }
   .figure img { width: 100%; display: block; }
   .figure figcaption { font-family: var(--mono); font-size: 11px; color: var(--faint); padding: 9px 14px; border-top: 1px solid var(--rule); }
+
+  /* placeholder figures (drop real screenshots in) */
+  .figrow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 22px 0; }
+  .figph { border: 1px dashed var(--mark-line); border-radius: 8px; background: var(--mark-soft); padding: 30px 18px; text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 150px; }
+  .figph .lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--mark-line); }
+  .figph .desc { font-size: 13px; color: var(--ink-soft); margin-top: 7px; line-height: 1.45; }
+  .figph.solo { margin: 22px 0; }
+
+  /* before / after metric block */
+  .baf { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin: 22px 0; }
+  .baf-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid var(--rule-2); }
+  .baf-row:last-child { border-bottom: none; }
+  .baf-cell { padding: 13px 18px; }
+  .baf-cell .bl { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .baf-cell .bn { font-family: var(--mono); font-size: 19px; font-weight: 600; color: var(--ink); margin-top: 2px; }
+  .baf-cell.after .bn { color: var(--live); }
+  .baf-arrow { color: var(--mark-line); font-size: 16px; padding: 0 6px; }
+  .baf-what { grid-column: 1 / -1; padding: 9px 18px 0; font-size: 13px; color: var(--ink-soft); border-top: 1px dashed var(--rule); }
 
   /* Skills as requirement tables */
   .req { border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--doc); }
@@ -270,6 +291,7 @@
     .otoggle { display: inline-flex; align-items: center; gap: 7px; }
     .meta-grid { grid-template-columns: 1fr; }
     .appx { grid-template-columns: 1fr; }
+    .figrow { grid-template-columns: 1fr; }
     .scorebar { grid-template-columns: repeat(2, 1fr); }
     .title-block { padding: 26px 22px 24px; }
     .spec-attr div { padding-right: 14px; }
@@ -326,19 +348,13 @@
   <!-- ===== OUTLINE ===== -->
   <nav class="outline" id="outline">
     <div class="outline-h">Document outline</div>
-    <a href="#northstar"><span class="num">★</span> North star</a>
-    <a href="#tldr"><span class="num">0.0</span> TL;DR</a>
-    <a href="#background"><span class="num">1.0</span> Background</a>
-    <a href="#users"><span class="num">2.0</span> Thesis</a>
-    <a href="#shipped"><span class="num">3.0</span> What I've shipped</a>
-    <a href="#kabba" class="sub"><span class="num">3.1</span> Kabba Transport</a>
-    <a href="#linq" class="sub"><span class="num">3.2</span> LinQ</a>
-    <a href="#radium" class="sub"><span class="num">3.3</span> Radium Media</a>
-    <a href="#metrics"><span class="num">4.0</span> Success metrics</a>
-    <a href="#operate"><span class="num">5.0</span> How I operate</a>
-    <a href="#nongoals"><span class="num">6.0</span> Non-goals</a>
-    <a href="#roadmap"><span class="num">7.0</span> Roadmap · v.next</a>
-    <a href="#appendix"><span class="num">8.0</span> Appendix</a>
+    <a href="#intro"><span class="num">0.0</span> Overview</a>
+    <a href="#shipped"><span class="num">1.0</span> Case studies</a>
+    <a href="#b2b" class="sub"><span class="num">1.1</span> Kabba for Business</a>
+    <a href="#linq" class="sub"><span class="num">1.2</span> LinQ</a>
+    <a href="#operate"><span class="num">2.0</span> How I work</a>
+    <a href="#roadmap"><span class="num">3.0</span> What's next</a>
+    <a href="#appendix"><span class="num">4.0</span> Appendix</a>
   </nav>
 
   <!-- ===== DOCUMENT ===== -->
@@ -348,188 +364,188 @@
     <header class="title-block">
       <div class="doc-kicker">Product Spec · Personal</div>
       <h1 class="doc-title">Nahom Mekonen</h1>
-      <p class="doc-sub">Product manager. This is my portfolio, written as a spec: who I am, what I've built, and the calls behind each one.</p>
+      <p class="doc-sub">Product manager. Two products I owned end to end, walked through the way I actually think about them: the problem, the calls, the numbers.</p>
       <div class="meta-grid">
-        <div class="meta-row"><span class="k">Author</span><span class="v">Nahom Mekonen</span></div>
         <div class="meta-row"><span class="k">Status</span><span class="v"><span class="live">●</span> Open to offers</span></div>
-        <div class="meta-row"><span class="k">Role</span><span class="v">Product Manager</span></div>
-        <div class="meta-row"><span class="k">Version</span><span class="v">2026.2</span></div>
+        <div class="meta-row"><span class="k">Now</span><span class="v">Head of Product, Kabba</span></div>
         <div class="meta-row"><span class="k">Location</span><span class="v">Minneapolis · remote ok</span></div>
+        <div class="meta-row"><span class="k">Path</span><span class="v">associate PM &rarr; head of product</span></div>
         <div class="meta-row"><span class="k">Method</span><span class="v">go and see for myself</span></div>
         <div class="meta-row"><span class="k">Bias</span><span class="v">shipping over guessing</span></div>
-        <div class="meta-row"><span class="k">Reviewers</span><span class="v">teams past zero</span></div>
       </div>
     </header>
 
-    <!-- NORTH STAR -->
-    <section class="northstar" id="northstar">
-      <div class="doc-kicker">My north star</div>
-      <div class="ns-sub">behind every product decision I make</div>
-      <blockquote>The job of a product manager is to understand the problem so deeply, and live so far into the customer's future, that you <span class="em">build what they will need before they know to ask for it</span>.</blockquote>
-      <div class="ns-by">— the bar I hold myself to</div>
-    </section>
-
-    <!-- 0. TL;DR -->
-    <section class="sec" id="tldr">
-      <div class="sec-head"><span class="sec-num">0.0</span><span class="sec-title">TL;DR</span></div>
-      <p class="lede">Product manager and founder who loves building things people actually rely on. I co-founded Kabba, a transportation technology company now moving more than a million trips, and before that bootstrapped Radium Media to $30M+ in sales with no outside funding. I come from product, growth, and the technical side, and I'm at my best on hard problems that real people feel every day. Based in Minneapolis, open to offers.</p>
+    <!-- INTRO: bio + metrics -->
+    <section class="sec" id="intro">
+      <p class="lede">I'm the Head of Product at Kabba Transport, a mass transit software company in Addis Ababa. I joined as employee number three and have owned product across our rider, driver, and operator apps ever since, growing it into a platform that has now completed over a million trips for 100+ of Ethiopia's biggest companies.</p>
+      <p class="lede">I did not take the obvious path to get here. Coming out of school I had offers from Fortune 500 companies, and they were good ones. I turned them down because I wanted to work on a genuinely hard problem I had grown up around, and I was willing to take the risk on a young African startup to do it. It is the best bet I have made. On the weekends I built LinQ, free software for student transport operators in Minnesota.</p>
       <div class="scorebar">
-        <div class="cell"><div class="n">1M+</div><div class="l">riders moved</div></div>
-        <div class="cell"><div class="n">10K+</div><div class="l">students routed</div></div>
-        <div class="cell"><div class="n">400%</div><div class="l">YoY growth</div></div>
-        <div class="cell"><div class="n">$30M+</div><div class="l">first company, bootstrapped</div></div>
-      </div>
-      <div class="callout">
-        <span class="tag">Why I care</span>
-        <p>I did not pick this problem off a whiteboard. It picked me a long time ago, at home, watching people I love work around something that should have just worked. That is also why the specific domain matters less to me than people expect. Once you have felt a problem that closely, you want to give the next one the same attention, whatever it turns out to be.</p>
+        <div class="cell"><div class="n">1M+</div><div class="l">trips completed</div></div>
+        <div class="cell"><div class="n">100+</div><div class="l">enterprise clients</div></div>
+        <div class="cell"><div class="n">3&rarr;50+</div><div class="l">team since I joined</div></div>
+        <div class="cell"><div class="n">95%</div><div class="l">client retention</div></div>
       </div>
     </section>
 
-    <!-- 1. BACKGROUND -->
-    <section class="sec" id="background">
-      <div class="sec-head"><span class="sec-num">1.0</span><span class="sec-title">Background</span></div>
-      <p>I came to the US from Ethiopia to study computer science, sure I would end up an engineer. Growth marketing pulled me sideways in college, and I started building small direct to consumer brands out of my dorm room.</p>
-      <p>That turned into <strong>Radium Media</strong>. Over three years it did $30M in sales with no outside money. It taught me more than my classes did: how to sell, how people actually decide and behave, and how to build a team and scale a product. I graduated with offers from good companies. I kept thinking about a problem back home instead.</p>
-      <p>So I went back to Ethiopia. Some of the fastest growing countries on earth run on transportation that was built decades ago, when it was built at all. Fixing that changes how millions of people live and work. I wanted to put my energy there.</p>
-      <p>That became <strong>Kabba</strong>. We are building public transit in a place that had almost none. I rode the minibuses for weeks as an ordinary commuter before I wrote anything down, because I would rather live a problem than guess at it. <strong>LinQ</strong> came later and closer to home. I saw the same struggle in my own community here in the US, small transportation companies moving thousands of kids with paper and phone calls, so I spent my weekends building them a tool to run their cars and routes, and gave it to them for free.</p>
-
-      <div class="cmt" data-anchor>
-        <div class="cmt-head"><span class="cmt-av">NM</span><span class="cmt-who">Nahom</span><span class="cmt-when">field note</span></div>
-        <div class="cmt-body">Those weeks on the minibus taught me more than any research I could have run. You learn a problem differently when you actually live it.</div>
-        <div class="cmt-foot">comment · <span class="rs">open</span></div>
-      </div>
-    </section>
-
-    <!-- 2. USERS -->
-    <section class="sec" id="users">
-      <div class="sec-head"><span class="sec-num">2.0</span><span class="sec-title">Thesis</span></div>
-      <p>I am a builder before I am anything else. I am drawn to problems you can actually touch, the kind a real person feels on a real morning, and I like staying with one long enough to move it. That thread runs through everything I have done, from selling products out of a dorm room to owning product for a transit company. The domain keeps changing. The way I approach it does not.</p>
-      <p>How I work is easy to say and hard to do. I go to where the problem lives before I write anything down. I look for the job people are actually trying to get done, which is almost never the feature they asked for. Then I put the smallest useful version in their hands, watch what really happens, and let the evidence decide what comes next.</p>
-      <ul class="ticks">
-        <li><strong>Live the problem before I build.</strong> I will spend two weeks as a user before I spend two months guessing. I rode the minibuses and I sat with the dispatchers.</li>
-        <li><strong>Find the real job.</strong> People rarely want the feature they name. They want the outcome underneath it, and that is what I design toward.</li>
-        <li><strong>Ship small and let reality vote.</strong> A rough version in someone's hands teaches me more than a flawless spec ever has.</li>
-        <li><strong>Measure what changes a decision.</strong> If a number will not change what we do next, I leave it alone.</li>
-      </ul>
-      <p>Most of this I learned the hard way, building in a market where I could not take card payments or reliable maps for granted. It left me allergic to assumptions. I hold my own ideas loosely and the problem tightly, and getting corrected early by a real user beats defending a tidy plan that was wrong all along. That is the kind of product person I am, and the kind of team I want to build with.</p>
-    </section>
-
-    <!-- 3. SHIPPED -->
+    <!-- 1. CASE STUDIES -->
     <section class="sec" id="shipped">
-      <div class="sec-head"><span class="sec-num">3.0</span><span class="sec-title">What I've shipped</span></div>
-      <p>Three things I have built. For each: the problem, the hardest call I made and what I traded for it, what happened, and what I would do differently. The metrics are here, but the calls are the point.</p>
+      <div class="sec-head"><span class="sec-num">1.0</span><span class="sec-title">Case studies</span></div>
+      <p>Two products I owned end to end, each walked through the same frame: the problem, how I validated it, the options I cut, what shipped, the numbers, and what I would change. Context: <strong>Kabba</strong> is shared mass transit for Addis Ababa, a subway that runs on minibuses with fixed routes and monthly subscriptions.</p>
 
-      <!-- 3.1 KABBA -->
-      <div class="spec" id="kabba">
+      <!-- 1.1 CASE STUDY: KABBA B2B TIER -->
+      <div class="spec" id="b2b">
         <div class="spec-top">
-          <div class="spec-logo"><img src="images/kabba-logo.svg" alt="Kabba Transport" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'lt',textContent:'K'}))"></div>
+          <div class="spec-logo"><img src="images/kabba-logo.svg" alt="Kabba Transport" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'lt',textContent:'B'}))"></div>
           <div>
-            <div class="spec-name">Kabba Transport</div>
-            <div class="spec-tag">Mass transit startup · Addis Ababa</div>
+            <div class="spec-name">Case study: Kabba for Business</div>
+            <div class="spec-tag">B2B corporate tier · the deep dive</div>
           </div>
-          <div class="spec-id">KB-021</div>
+          <div class="spec-id">CS-01</div>
         </div>
         <div class="spec-attr">
-          <div><span class="k">status:</span> <span class="ship">shipped, live</span></div>
-          <div><span class="k">role:</span> co-founder &amp; head of product</div>
-          <div><span class="k">timeline:</span> 2021 to present</div>
-          <div><span class="k">surface:</span> rider · driver · operator</div>
+          <div><span class="k">role:</span> Senior PM, product owner</div>
+          <div><span class="k">shipped:</span> <span class="ship">2023, live</span></div>
+          <div><span class="k">team:</span> 6 eng · ops · finance</div>
+          <div><span class="k">outcome:</span> core revenue line</div>
         </div>
         <div class="spec-body">
-          <p class="lede">Kabba is the company I care about most. We build shared mass transit for Addis Ababa, a city where about five million people move every day with no system built for them. Think of it as a subway that happens to run on minibuses, not another ride hailing app. Fixed routes, monthly subscriptions, and prices that do not move on you.</p>
+          <p class="lede">How I turned employee commuting into Kabba's highest margin product. The full arc, the way I would walk a hiring manager through it: the problem, the research, the options I killed, what shipped, and what moved.</p>
 
-          <div class="sub-head"># the problem</div>
-          <p>I rode the informal minibuses for weeks before writing a single requirement, living the problem instead of studying it. The reframe that reorganized everything: <strong>people were not buying a ride. They were buying the confidence that they would clock in on time tomorrow, and the day after that.</strong> Once the job read that way, most of the product decisions answered themselves.</p>
-          <p>Ride hailing had already arrived. It fixed reliability, then priced itself out of a working person's daily commute. The minibuses were the opposite: cheap, but you could not count on them for anything. Nobody had built the middle, so we did.</p>
+          <div class="sub-head"># 1 · the problem</div>
+          <p>I kept seeing the same pattern in our ridership data: clusters of riders leaving the same office parks at the same time, many reimbursed by their employer. Digging in, I found companies were quietly running their own staff transport, renting buses, hiring drivers, and eating the safety complaints and no-shows themselves. It was expensive, off-mission, and a liability nobody wanted to own.</p>
+          <p>So I went and asked. I sat with <strong>30 HR and operations leaders across 20 companies</strong>. The line that reframed the product came from an HR director who told me, plainly: <em>"I don't want to be in the transportation business. I want my people to show up on time and I want the risk off my desk."</em> They were not buying vehicles. They were buying attendance and peace of mind.</p>
 
-          <div class="sub-head"># the call</div>
+          <div class="pull">They weren't buying transportation. They were buying attendance, and the liability off their desk.</div>
+
+          <div class="sub-head"># 2 · why it mattered to the business</div>
+          <p>B2C revenue swung with weather, fuel, and paydays. Corporate contracts were the opposite: recurring, predictable, and high margin, and every company that signed anchored a route with guaranteed daily riders, which made the B2C service on that route more reliable too. One sale improved two products. That is the kind of leverage worth chasing.</p>
+
+          <div class="sub-head"># 3 · the options, and the ones I cut</div>
           <div class="decision">
             <span class="tag">Decision record</span>
-            <div class="drow"><div class="dk">chose</div><div class="dv">Fix the reconciliation bottleneck no one could see before we added a single new fleet.</div></div>
-            <div class="drow"><div class="dk">over</div><div class="dv">Chasing the growth number the whole room wanted to watch climb next quarter.</div></div>
-            <div class="drow"><div class="dk">the bet</div><div class="dv">We held roughly flat for a quarter while I defended a still dashboard to people who wanted it moving. When we did expand, operations held instead of buckling. <strong>It is the call I am proudest of, because it was the least popular one in the room.</strong></div></div>
+            <div class="drow"><div class="dk">chose</div><div class="dv"><strong>A subscription tier with guaranteed seats</strong> on the shared network: a company admin dashboard, per-employee monthly billing, and attendance reporting for HR.</div></div>
+            <div class="drow"><div class="dk">over A</div><div class="dv"><strong>Per-ride corporate billing.</strong> Cut it: no budget predictability for HR, and it guaranteed no capacity at peak, the exact thing they were paying to stop worrying about.</div></div>
+            <div class="drow"><div class="dk">over B</div><div class="dv"><strong>Dedicated white-label shuttles per client.</strong> Cut it: capital heavy, low margin, and it threw away the shared network that made us different from the bus rental they already hated.</div></div>
+            <div class="drow"><div class="dk">the bet</div><div class="dv">Guaranteed seats on shared routes gave HR a predictable line item and gave us margin without buying a single new bus. I used RICE to sequence: admin dashboard and billing were must-haves, advanced analytics waited.</div></div>
           </div>
+
+          <div class="sub-head"># 4 · what we shipped</div>
+          <p>I wrote the specs and worked daily with <strong>six engineers, the operations team on route capacity, and finance on billing</strong>, and I presented the tier directly to client HR leaders and to our own executive team. We shipped in three parts:</p>
+          <ul class="ticks">
+            <li><strong>An HR admin dashboard</strong> to enroll employees, assign them to routes, and see who is riding, the visibility that replaced their spreadsheets and phone calls.</li>
+            <li><strong>Guaranteed seats on fixed routes</strong> with monthly per-employee billing, so HR got one predictable invoice instead of managing a fleet.</li>
+            <li><strong>Attendance and usage reporting</strong> that gave HR proof their people were getting to work, the outcome they actually cared about.</li>
+          </ul>
 
           <div class="figure">
             <img src="images/kabba-van.png" alt="Kabba Transport vehicle" onerror="this.closest('.figure').style.display='none'">
-            <figcaption>fig 3.1 · Kabba on the road in Addis Ababa</figcaption>
+            <figcaption>fig · Kabba on the road in Addis Ababa</figcaption>
           </div>
 
+          <div class="sub-head"># 5 · the impact</div>
+          <p>Piloted with one anchor client of about 200 employees, then rolled out over roughly 18 months to a core book of business.</p>
           <div class="scorebar">
-            <div class="cell"><div class="n">1M+</div><div class="l">trips served</div></div>
-            <div class="cell"><div class="n">400%</div><div class="l">YoY growth</div></div>
-            <div class="cell"><div class="n">95%</div><div class="l">platform retention</div></div>
-            <div class="cell"><div class="n">40+</div><div class="l">enterprise clients</div></div>
+            <div class="cell"><div class="n">1&rarr;100+</div><div class="l">corporate clients</div></div>
+            <div class="cell"><div class="n">~35%</div><div class="l">of company revenue</div></div>
+            <div class="cell"><div class="n">95%</div><div class="l">client retention, YoY</div></div>
+            <div class="cell"><div class="n">#1</div><div class="l">highest margin product</div></div>
           </div>
-
-          <div class="sub-head"># how I worked</div>
-          <p>I owned the product end to end, from discovery to specs an engineer could build without coming back to ask what I meant. I worked with a team of ten engineers, and together we shipped for 40+ enterprise clients and 30 school partners.</p>
-          <ul class="ticks">
-            <li><strong>Led product strategy and roadmap</strong> across rider, driver, and operator surfaces. Used RICE scoring to force sequencing when engineering bandwidth and operational urgency collided.</li>
-            <li><strong>Interviewed more than 100 companies</strong> and ran discovery with commuters and drivers. It turned out a driver's real job was steady income, not navigation, so I rebuilt the driver app around that.</li>
-            <li><strong>Mapped the operator workflow end to end and traced the money.</strong> That is where I found the reconciliation problem, invisible from the outside, that became the call above.</li>
-            <li><strong>Specified and owned the payment gateway and government API integrations,</strong> managing external technical and compliance stakeholders from brief to go live.</li>
-            <li><strong>Built the B2B corporate tier from user stories up.</strong> HR directors did not want transportation. They wanted liability off their desk, and that reframe made it our highest margin product.</li>
-            <li><strong>Built the analytics layer</strong> behind real time operating decisions and used it to test routes and pricing before committing to full rollout.</li>
-          </ul>
+          <div class="baf">
+            <div class="baf-row">
+              <div class="baf-cell"><div class="bl">before</div><div class="bn">~18%</div></div>
+              <div class="baf-arrow">&rarr;</div>
+              <div class="baf-cell after"><div class="bl">after</div><div class="bn">~4%</div></div>
+              <div class="baf-what">Employee late arrivals on enrolled routes, the metric HR judged us on.</div>
+            </div>
+            <div class="baf-row">
+              <div class="baf-cell"><div class="bl">before</div><div class="bn">~6 hrs/wk</div></div>
+              <div class="baf-arrow">&rarr;</div>
+              <div class="baf-cell after"><div class="bl">after</div><div class="bn">under 1</div></div>
+              <div class="baf-what">HR time spent managing transport logistics per client.</div>
+            </div>
+          </div>
 
           <div class="retro">
-            <span class="tag">Retro · open questions</span>
-            <div class="retro-item"><strong>Instrument earlier, decide later.</strong> I was calling product decisions directionally well after we had the usage to be precise. Directional is fine before product market fit. After it, that is just an excuse.</div>
-            <div class="retro-item"><strong>Run B2B discovery in month 2, not month 18.</strong> Corporate HR turned out to be our most rational, highest value buyer. Running that discovery earlier would have reshaped the roadmap.</div>
-            <div class="retro-item"><strong>Make the driver feedback loop a standing channel.</strong> Driver sessions kept handing me critical insight. I treated them as lucky finds. They should have been a fixed input from day one.</div>
+            <span class="tag">Reflection · what I would change</span>
+            <div class="retro-item"><strong>I found this too late.</strong> The demand was sitting in our ridership data from early on. I ran B2B discovery in month 18, not month 2. Our highest margin product should have been a hypothesis I tested in the first quarter, not a pattern I stumbled into.</div>
+            <div class="retro-item"><strong>I under-instrumented the pilot.</strong> I had strong qualitative signal from HR but thin baseline numbers, so the before/after took longer to prove than it should have. Now I set the measurement before the pilot, not after.</div>
           </div>
-        </div>
-
-        <div class="cmt" data-anchor>
-          <div class="cmt-head"><span class="cmt-av star">★</span><span class="cmt-who">Recognition</span><span class="cmt-when">resolved</span></div>
-          <div class="cmt-body">Nominated, <strong>Africa Startup of the Year</strong>, for innovation in urban mobility.</div>
-          <div class="cmt-foot">comment · <span class="rs">resolved</span></div>
         </div>
       </div>
 
-      <!-- 3.2 LINQ -->
+      <!-- 1.2 CASE STUDY: LINQ -->
       <div class="spec" id="linq">
         <div class="spec-top">
           <div class="spec-logo"><img src="images/linq-logo.png" alt="LinQ" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'lt',textContent:'L'}))"></div>
           <div>
-            <div class="spec-name">LinQ</div>
-            <div class="spec-tag">Student transportation · side project</div>
+            <div class="spec-name">Case study: LinQ</div>
+            <div class="spec-tag">Student transportation · built solo, free</div>
           </div>
-          <div class="spec-id">LQ-024</div>
+          <div class="spec-id">CS-02</div>
         </div>
         <div class="spec-attr">
-          <div><span class="k">type:</span> built solo, on weekends</div>
-          <div><span class="k">status:</span> <span class="ship">shipped, live</span></div>
+          <div><span class="k">role:</span> solo, on weekends</div>
+          <div><span class="k">shipped:</span> <span class="ship">live</span></div>
           <div><span class="k">cost to operators:</span> free</div>
           <div><span class="k">market:</span> Minnesota, North Carolina</div>
         </div>
         <div class="spec-body">
-          <p class="lede">LinQ started as a side project because the problem would not leave me alone. I kept seeing it in my own community here: small transportation companies moving thousands of kids with paper and phone calls. The big yellow school buses have plenty of software. The seven-seater vans that carry those kids every day have almost none. So I spent my weekends building the tool they were missing, routing, dispatch, and live tracking to run their cars and routes, and I gave it to them for free.</p>
+          <p class="lede">A side project I could not put down, and proof I can take a product from a real problem to a shipped, adopted tool on my own. Small operators move thousands of kids in seven-seater vans on paper and phone calls. I built them the software the big yellow-bus vendors never bothered to.</p>
 
+          <div class="sub-head"># 1 · the problem</div>
+          <p>"Type 3" operators run seven-seater vans for school districts, and they are invisible to the software market: too small for the big yellow-bus vendors to bother with. So they run routes on spreadsheets, sticky notes, and phone calls. And parents have zero visibility, no idea where their child is between home and school. I saw it up close, operators in my own community, family included, drowning every morning.</p>
+
+          <div class="sub-head"># 2 · the research</div>
+          <p>I sat with <strong>about 12 operators</strong> and rode along on the morning run. The real job was not the "route optimization" the big tools sell. It was two smaller, sharper things: the dispatcher knowing exactly who is on which van right now, and the parent knowing their kid is safe. Everything else was noise on the one morning that mattered.</p>
+          <div class="pull">Parents called the office all morning asking one question: where is my kid? Nobody could answer it.</div>
+
+          <div class="sub-head"># 3 · the options, and the one I cut</div>
+          <div class="decision">
+            <span class="tag">Decision record</span>
+            <div class="drow"><div class="dk">chose</div><div class="dv"><strong>Build only two things:</strong> the dispatcher's daily screen and a live map for parents.</div></div>
+            <div class="drow"><div class="dk">over</div><div class="dv">Matching the big vendors' feature lists, billing, invoicing, compliance reporting.</div></div>
+            <div class="drow"><div class="dk">the constraint</div><div class="dv">I had weekends and nothing else, so I cut everything that was not the job the morning revolved around. <strong>Operators adopted it anyway, because it did the one thing paper could not.</strong></div></div>
+          </div>
+
+          <div class="sub-head"># 4 · what shipped</div>
+          <ul class="ticks">
+            <li><strong>A dispatcher daily screen</strong> with drivers, routes, and student assignments on one view, replacing the spreadsheet and the sticky notes.</li>
+            <li><strong>A live parent app</strong> showing the real-time location of the van carrying their child, the feature I cared about most.</li>
+            <li><strong>Routing and dispatch for seven-seater fleets,</strong> the segment the big-bus software had ignored.</li>
+          </ul>
+          <div class="figrow">
+            <div class="figph"><span class="lbl">screenshot</span><span class="desc">Dispatcher daily screen, routes and student assignments</span></div>
+            <div class="figph"><span class="lbl">screenshot</span><span class="desc">Parent app, live location of the child's van</span></div>
+          </div>
+
+          <div class="sub-head"># 5 · the impact</div>
           <div class="scorebar">
-            <div class="cell"><div class="n">10+</div><div class="l">transport companies</div></div>
+            <div class="cell"><div class="n">0&rarr;10+</div><div class="l">operators adopted</div></div>
             <div class="cell"><div class="n">10K+</div><div class="l">students routed</div></div>
             <div class="cell"><div class="n">2</div><div class="l">US states</div></div>
             <div class="cell"><div class="n">live</div><div class="l">parent tracking</div></div>
           </div>
-
-          <div class="sub-head"># the call</div>
-          <div class="decision">
-            <span class="tag">Decision record</span>
-            <div class="drow"><div class="dk">chose</div><div class="dv">Build only the dispatcher's daily screen and a live map for parents.</div></div>
-            <div class="drow"><div class="dk">over</div><div class="dv">Matching the feature lists of the big school bus software.</div></div>
-            <div class="drow"><div class="dk">the constraint</div><div class="dv">I had weekends and nothing else, so I cut everything that was not the job the day revolved around. Billing and reporting waited. <strong>Operators adopted it anyway, because it did the one thing they could not do on paper.</strong></div></div>
+          <div class="baf">
+            <div class="baf-row">
+              <div class="baf-cell"><div class="bl">before</div><div class="bn">~2 hrs</div></div>
+              <div class="baf-arrow">&rarr;</div>
+              <div class="baf-cell after"><div class="bl">after</div><div class="bn">~20 min</div></div>
+              <div class="baf-what">Dispatcher time to build the morning's routes.</div>
+            </div>
+            <div class="baf-row">
+              <div class="baf-cell"><div class="bl">before</div><div class="bn">a morning of calls</div></div>
+              <div class="baf-arrow">&rarr;</div>
+              <div class="baf-cell after"><div class="bl">after</div><div class="bn">near zero</div></div>
+              <div class="baf-what">"Where is my kid?" calls to the operator, once parents had the live map.</div>
+            </div>
           </div>
+          <p>We can track a package across an ocean. A kid on the way to school should not be harder to find than that.</p>
 
-          <div class="sub-head"># the build</div>
-          <ul class="ticks">
-            <li><strong>Gave dispatchers one screen</strong> for drivers, routes, and student assignments, the kind of visibility the big bus software never bothered to build for type 3 fleets.</li>
-            <li><strong>Put a live map in parents' hands,</strong> so they can see where their child is on the way to school. That was the part I cared about most.</li>
-            <li><strong>Routed 10,000+ students</strong> for 10+ operators across Minnesota and North Carolina, turning spreadsheets and phone calls into a real system.</li>
-          </ul>
-
-          <p>The part that stays with me is simple. We can track a package across an ocean. A kid on the way to school should not be harder to find than that.</p>
+          <div class="retro">
+            <span class="tag">Reflection · what I would change</span>
+            <div class="retro-item"><strong>Free got adoption but capped the learning.</strong> Giving it away got operators in fast, but without a price signal I could not tell which features they truly valued. Next time I would charge a small amount early, not for money, but for the truth.</div>
+            <div class="retro-item"><strong>I built for the operators I could reach.</strong> Mostly my own network. I would run wider discovery before assuming their morning was every operator's morning.</div>
+          </div>
         </div>
 
         <div class="cmt" data-anchor>
@@ -539,86 +555,25 @@
         </div>
       </div>
 
-      <!-- 3.3 RADIUM -->
-      <div class="spec" id="radium">
-        <div class="spec-top">
-          <div class="spec-logo"><img src="images/radium-logo.svg" alt="Radium Media" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'lt',textContent:'R'}))"></div>
-          <div>
-            <div class="spec-name">Radium Media</div>
-            <div class="spec-tag">Creator commerce · bootstrapped</div>
-          </div>
-          <div class="spec-id">RD-019</div>
-        </div>
-        <div class="spec-attr">
-          <div><span class="k">status:</span> <span class="ship">shipped</span></div>
-          <div><span class="k">role:</span> founder, product &amp; growth</div>
-          <div><span class="k">timeline:</span> 2019 to 2023</div>
-          <div><span class="k">funding:</span> none</div>
-        </div>
-        <div class="spec-body">
-          <p class="lede">Where it started. A creator commerce company I built on one bet: creator audiences are the most loyal, high intent buyers in e-commerce, and almost nobody was building brands for them on purpose.</p>
-
-          <div class="scorebar">
-            <div class="cell"><div class="n">$30M+</div><div class="l">sales in 3 years</div></div>
-            <div class="cell"><div class="n">200K+</div><div class="l">customers</div></div>
-            <div class="cell"><div class="n">0</div><div class="l">outside funding</div></div>
-            <div class="cell"><div class="n">5+</div><div class="l">brands launched</div></div>
-          </div>
-
-          <div class="sub-head"># the insight</div>
-          <p>Most companies saw a creator's audience as ad inventory. I read it as a product brief. A mid tier creator with 200,000 engaged followers has the one thing brands spend millions trying to manufacture: trust. So I built the brands backwards, audience first and product second, with the creator as proof the market was already there.</p>
-          <ul class="ticks">
-            <li><strong>Built the audience persona before the product,</strong> down to how they buy and what earns their trust.</li>
-            <li><strong>Validated fit before spending,</strong> A/B testing the message with each audience before scaling a dollar.</li>
-            <li><strong>Turned it into a playbook</strong> that worked on the fifth brand as well as the first.</li>
-          </ul>
-
-          <div class="sub-head"># the call</div>
-          <div class="decision">
-            <span class="tag">Decision record</span>
-            <div class="drow"><div class="dk">chose</div><div class="dv">Pick the audience and the creator first, then build the product to fit them.</div></div>
-            <div class="drow"><div class="dk">over</div><div class="dv">Building a product I liked and buying attention for it later.</div></div>
-            <div class="drow"><div class="dk">the bet</div><div class="dv">I passed on product ideas with no audience I could reach honestly, which made us slower to launch. <strong>In return, every brand had demand before it had inventory.</strong></div></div>
-          </div>
-
-          <div class="retro">
-            <span class="tag">Retro · what I learned</span>
-            <div class="retro-item"><strong>Build retention from day one.</strong> I optimized hard for acquisition. The brands that lasted had a real repeat purchase loop, and I learned that a few brands too late.</div>
-          </div>
-        </div>
-
-        <div class="cmt" data-anchor>
-          <div class="cmt-head"><span class="cmt-av">NM</span><span class="cmt-who">Nahom</span><span class="cmt-when">note</span></div>
-          <div class="cmt-body">$30M with no funding, mostly while I was still in college. It taught me how much distribution matters, and how much I still had to learn.</div>
-          <div class="cmt-foot">comment · <span class="rs">open</span></div>
-        </div>
-      </div>
     </section>
 
-    <!-- 4. METRICS -->
-    <section class="sec" id="metrics">
-      <div class="sec-head"><span class="sec-num">4.0</span><span class="sec-title">Success metrics</span></div>
-      <p>The numbers, across everything I have built. No rounding up.</p>
-      <div class="scorebar">
-        <div class="cell"><div class="n">1M+</div><div class="l">trips served</div></div>
-        <div class="cell"><div class="n">10K+</div><div class="l">students routed</div></div>
-        <div class="cell"><div class="n">$30M+</div><div class="l">sales generated</div></div>
-        <div class="cell"><div class="n">400%</div><div class="l">YoY growth</div></div>
-        <div class="cell"><div class="n">95%</div><div class="l">platform retention</div></div>
-        <div class="cell"><div class="n">40+</div><div class="l">enterprise clients</div></div>
-        <div class="cell"><div class="n">30</div><div class="l">school partners</div></div>
-      </div>
-    </section>
-
-    <!-- 5. HOW I OPERATE -->
+    <!-- 3. HOW I WORK -->
     <section class="sec" id="operate">
-      <div class="sec-head"><span class="sec-num">5.0</span><span class="sec-title">How I operate</span></div>
-      <p>What I actually do day to day, grouped by surface.</p>
+      <div class="sec-head"><span class="sec-num">2.0</span><span class="sec-title">How I work</span></div>
+      <p>Four habits under everything above. The domain keeps changing. These do not.</p>
+      <ul class="ticks">
+        <li><strong>Live the problem before I build.</strong> Two weeks as a user beats two months guessing. I rode the minibuses and I sat with the dispatchers.</li>
+        <li><strong>Find the real job.</strong> People rarely want the feature they name. They want the outcome underneath it, and that is what I design toward.</li>
+        <li><strong>Ship small and let reality vote.</strong> A rough version in someone's hands teaches me more than a flawless spec ever has.</li>
+        <li><strong>Measure what changes a decision.</strong> If a number will not change what we do next, I leave it alone.</li>
+      </ul>
+
+      <div class="sub-head"># the toolkit</div>
       <div class="req">
-        <div class="req-row"><div class="rk">product</div><div class="rv">Roadmapping &amp; backlog prioritization, PRDs &amp; user stories, OKRs &amp; metrics, discovery &amp; user research, RICE / MoSCoW, A/B testing, Agile / Scrum.</div></div>
-        <div class="req-row"><div class="rk">business</div><div class="rv">Founder experience from zero to scale, bootstrapped. Stakeholder alignment, cross functional leadership, market analysis, go to market, B2B and B2C strategy.</div></div>
-        <div class="req-row"><div class="rk">technical</div><div class="rv">Platform &amp; systems thinking, REST APIs &amp; integrations, GPS &amp; location data, routing &amp; dispatch logic, SQL &amp; Python, mobile &amp; web products, AWS, Jira.</div></div>
-        <div class="req-row"><div class="rk">domains</div><div class="rv">Mass transit &amp; mobility, student transportation, fleet &amp; dispatch, logistics &amp; operations, payments, marketplaces, emerging markets.</div></div>
+        <div class="req-row"><div class="rk">product</div><div class="rv">Roadmapping &amp; prioritization (RICE), PRDs &amp; user stories, discovery &amp; user research, A/B testing, OKRs &amp; metrics, Agile / Scrum.</div></div>
+        <div class="req-row"><div class="rk">leadership</div><div class="rv">Executive &amp; stakeholder communication, cross functional leadership, team &amp; vendor management, go to market, B2B and B2C strategy.</div></div>
+        <div class="req-row"><div class="rk">technical</div><div class="rv">SQL &amp; Python, REST APIs &amp; integrations, GPS &amp; location data, routing &amp; dispatch logic, systems thinking, mobile &amp; web.</div></div>
+        <div class="req-row"><div class="rk">domains</div><div class="rv">Mass transit &amp; mobility, student transportation, fleet &amp; dispatch, logistics, payments, marketplaces, emerging markets.</div></div>
       </div>
 
       <div class="cmt" data-anchor>
@@ -628,25 +583,13 @@
       </div>
     </section>
 
-    <!-- 6. NON-GOALS -->
-    <section class="sec" id="nongoals">
-      <div class="sec-head"><span class="sec-num">6.0</span><span class="sec-title">Non-goals</span></div>
-      <p>A spec is honest about what it is not. So I will be too.</p>
-      <ul class="nogoals">
-        <li><strong>I am not leaving Kabba because it failed.</strong> It works, and I am proud of it. I want my next chapter to be hands on, inside a mission I can really pour into.</li>
-        <li><strong>I am not looking to start another company right now.</strong> I have loved building from zero, but what I want next is to go deep on one product with a team I can learn from.</li>
-        <li><strong>I am not chasing a title.</strong> I would rather own a real problem than sit higher on an org chart.</li>
-        <li><strong>I try not to track numbers that do not change a decision.</strong> I would rather measure less and actually act on it.</li>
-      </ul>
-    </section>
-
-    <!-- 7. ROADMAP -->
+    <!-- 4. ROADMAP -->
     <section class="sec" id="roadmap">
-      <div class="sec-head"><span class="sec-num">7.0</span><span class="sec-title">Roadmap · v.next</span></div>
+      <div class="sec-head"><span class="sec-num">3.0</span><span class="sec-title">What's next</span></div>
       <div class="roadmap">
         <div class="doc-kicker">Next milestone</div>
-        <h3>v.next is your team.</h3>
-        <p>I am looking for the next problem to give that same care to. Five years deep on one of them, I know how I work best: close to the people who feel it, inside a team building something that matters. If that is your team, I would like to talk.</p>
+        <h3>The next problem is yours.</h3>
+        <p>I want to give the next hard problem the same care I gave this one: close to the people who feel it, inside a team building something that matters. If that is your team, I would like to talk.</p>
         <div class="road-links">
           <a class="k1" href="mailto:nahomendalk@gmail.com">
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 5.5l6.5 4.5 6.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -666,12 +609,16 @@
 
     <!-- 8. APPENDIX -->
     <section class="sec" id="appendix">
-      <div class="sec-head"><span class="sec-num">8.0</span><span class="sec-title">Appendix</span></div>
+      <div class="sec-head"><span class="sec-num">4.0</span><span class="sec-title">Appendix</span></div>
       <div class="appx">
         <div class="appx-card">
           <h4>Education</h4>
-          <p><strong>B.S. Computer Science &amp; Cybersecurity</strong></p>
+          <p><strong>B.S. Computer Science</strong></p>
           <p class="small">Metro State University · Dean's List</p>
+        </div>
+        <div class="appx-card">
+          <h4>Earlier</h4>
+          <p class="small"><strong>Wings Transportation</strong> · software engineer intern (2019 to 2021). Built routing and driver-assignment tools for a ~200 driver fleet. Where I learned how dispatch really works.</p>
         </div>
         <div class="appx-card">
           <h4>Recognition</h4>
